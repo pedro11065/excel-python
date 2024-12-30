@@ -3,7 +3,6 @@ import datetime
 
 from openpyxl import load_workbook
 
-# Carregar o arquivo Excel
 caminho_arquivo = "C:/Users/Quixabeira/Documents/dados.xlsx"
 workbook = load_workbook(caminho_arquivo)
 
@@ -16,8 +15,14 @@ for linha in planilha:
     linha = [celula.value for celula in linha if celula.value is not None]
     if linha != []:
         for celula in linha:
-            None
-        print(linha)
+            if celula == "PRODUTO":
+                celula = "PRODUTO                      "
+
+            if isinstance(celula, datetime.datetime):
+                    celula = celula.strftime("%Y-%m-%d") 
+            print(celula, end='\t') 
+        print("\b")
+        
 
 # Fechar o arquivo (boa prática)
 workbook.close()
