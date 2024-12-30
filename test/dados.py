@@ -11,6 +11,9 @@ worksheet =   workbook['VENDAS'] # ou workbook.active
 
 line_count = 0
 
+names = []
+total = []
+
 # Ler valores das linhas
 for line in worksheet:
 
@@ -32,9 +35,7 @@ for line in worksheet:
 
 #-----------------------------------------------------------------------
 #Apuração dos dados
-
-
-        
+    
         info_sum = 0
 
         for info in line_info:
@@ -45,7 +46,25 @@ for line in worksheet:
                 None
 
         if info_sum > 0:
-            print(f'\nForam vendidos {info_sum} {line_info[0]} ')
+
+            names.append(line_info[0])
+            total.append(info_sum)
+
+
+print("\nForam vendidos:\n")
+for name, num in zip(names, total):
+    print(f" {name}: {num}")
+print('')
+
+most_sold_index = -1
+most_sold = 0
+
+for index, value in enumerate(total):
+    if value > most_sold:
+        most_sold = value
+        most_sold_index = index
+
+print(f"O produto mais vendido foi: {names[most_sold_index]} \nTotal vendido: {most_sold}")
 
 # Fechar o arquivo (boa prática)
 workbook.close()
