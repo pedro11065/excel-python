@@ -3,7 +3,7 @@ import datetime
 
 from openpyxl import load_workbook
 
-caminho_arquivo = "C:/Users/Quixabeira/Documents/dados.xlsx"
+caminho_arquivo = "C:/Users/Quixabeira/Documents/Projetos/excel-python/dados.xlsx"
 workbook = load_workbook(caminho_arquivo)
 
 # Selecionar uma planilha (por nome ou ativa)
@@ -55,8 +55,8 @@ for index,i in enumerate(data_vendas):
 
 #Printando os dados -------------------------------------
 
-for i in data_vendas:
-   print(i)
+#for i in data_vendas:
+ #  print(i)
 
 #Mesclando dados com a tabela "valor"--------------------
 workbook = load_workbook(caminho_arquivo)
@@ -91,7 +91,7 @@ for index,i in enumerate(data_valor):
     id = i[0]
     name = i[1]  # Nome do produto
     price = i[2]  # preço de venda
-    acsition = float(price) * 0.5
+    acsition = float(price) * 0.65
 
     data_valor[index] = {'id':id,
          'product':name,
@@ -100,9 +100,19 @@ for index,i in enumerate(data_valor):
     
 #Printando os dados -------------------------------------
 
-print("")
+#print("")
 
-for i in data_valor:
-    print(i)
+#for i in data_valor:
+ #   print(i)
 
 #Analisando ambos os dados -------------------------------------
+
+for vendas, valor in zip(data_vendas, data_valor):
+    id = vendas.get('id')
+    name = vendas.get('product')
+    sells = vendas.get('sells')
+    price = "R${:,.2f}".format(valor.get('price') * sells)
+    acsition = "R${:,.2f}".format(valor.get('acsition') * sells)
+    profit = "R${:,.2f}".format(valor.get('price') * sells - valor.get('acsition') * sells)
+
+    print(f"ID: {id} \nName: {name} \nSells quantity: {sells}\nTotal sold: {price} \nAcsition price: {acsition}\nProfit: {profit}\n")
