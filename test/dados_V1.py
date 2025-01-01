@@ -3,7 +3,7 @@ import datetime
 
 from openpyxl import load_workbook
 
-caminho_arquivo = "C:/Users/Quixabeira/Documents/Projetos/excel-python/dados.xlsx"
+caminho_arquivo = "dados.xlsx"
 workbook = load_workbook(caminho_arquivo)
 
 # Selecionar uma planilha (por nome ou ativa)
